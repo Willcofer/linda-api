@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import CourseRepo from './../repositories/CoursesRepo';
+import { UserService } from '../services/UserService';
 import { apiErrorHandler } from './../handlers/errorHandler';
 
 export default class UserController {
@@ -7,7 +7,7 @@ export default class UserController {
 
   async getAllUsers(req: Request, res: Response, next: NextFunction) {
     try {
-      const courseList = await CourseRepo.getAllCourses({ order: ['seqNo'] });
+      const courseList = await UserService.getAllUsers({ order: ['seqNo'] });
       res.json(courseList);
     } catch (error) {
       apiErrorHandler(error, req, res, 'Fetch All Courses failed.');
